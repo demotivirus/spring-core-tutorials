@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="duke" class="xml.tutorial3.Juggler"/>
+    <bean id="sam" class="xml.tutorial4.Juggler">
+        <constructor-arg value="15"/>
+    </bean>
+
+
+    <bean id="sonnet29" class="xml.tutorial5.Sonnet29"/>
+    <bean id="poeticJuggler" class="xml.tutorial5.PoeticJuggler">
+        <constructor-arg value="15"/>
+        <constructor-arg ref="sonnet29"/>
+    </bean>
+
+    <bean id="quest" class="xml.tutorial6.SlayDragonQuest"/>
+    <bean id="knight" class="xml.tutorial6.BraveKnight">
+        <constructor-arg ref="quest"/>
+    </bean>
+
+    <bean id="stage" class="xml.tutorial7.Stage" factory-method="getInstance"/>
+
+    <bean id="saxophone" class="xml.tutorial9.Saxophone"/>
+    <bean id="kenny" class="xml.tutorial9.Instrumentalist">
+        <property name="song" value="Jungle Bells"/>
+        <property name="name" value="Kenny"/>
+        <property name="instrument" ref="saxophone"/>
+    </bean>
+
+    <bean id="myCoach" class="xml.tutorial10.TrackCoach"/>
+    <bean id="maniacCoach" class="xml.tutorial10.ManiacCoach"/>
+
+    <bean id="myFortuneService" class="xml.tutorial11.HappyFortuneService"/>
+    <bean id="profeshnKilla" class="xml.tutorial11.KillaCoach">
+        <constructor-arg ref="myFortuneService"/>
+    </bean>
+
+    <bean id="myFortune" class="xml.tutorial11.HappyFortuneService"/>
+    <bean id="myKillaCoach" class="xml.tutorial11.WriterCoach">
+        <constructor-arg ref="myFortune"/>
+    </bean>
+
+    <bean id="fortuneService" class="xml.tutorial12.HappyFortuneService"/>
+    <bean id="myMinerCoach" class="xml.tutorial12.MinerCoach">
+        <property name="fortuneService" ref="fortuneService"/>
+    </bean>
+
+    <bean id="fortuneService13" class="xml.tutorial13.BadFortuneService"/>
+    <bean id="cricketCoach" class="xml.tutorial13.CricketCoach">
+        <property name="fortuneService" ref="fortuneService13"/>
+    </bean>
+
+    <bean id="scopeCoach" class="xml.tutorial15.ScopeCoach" scope="prototype"/>
+
+    <bean id="happyFortune16" class="xml.tutorial16.HappyFortune"
+          init-method="initMethod"
+          destroy-method="destroyMethod"/>
+    <bean id="initCoach" class="xml.tutorial16.InitCoach"
+          init-method="initMethod"
+          destroy-method="destroyMethod">
+        <constructor-arg ref="happyFortune16"/>
+    </bean>
+</beans>
